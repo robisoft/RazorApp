@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Nuova cartella1\**" />
+    <Compile Remove="Nuova cartella2\**" />
+    <Content Remove="Nuova cartella1\**" />
+    <Content Remove="Nuova cartella2\**" />
+    <EmbeddedResource Remove="Nuova cartella1\**" />
+    <EmbeddedResource Remove="Nuova cartella2\**" />
+    <None Remove="Nuova cartella1\**" />
+    <None Remove="Nuova cartella2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="crossPublisherCore">
       <HintPath>..\crossPublisherCore\bin\Release\net8.0\crossPublisherCore.dll</HintPath>
     </Reference>

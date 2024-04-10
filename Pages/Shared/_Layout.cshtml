@@ -1,4 +1,17 @@
 ﻿@using crossPublisher
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+
+@{
+    // Pages definito nel modello e passate tramite ViewData.
+    // Se le passavo direttamente con Model.Page, ogni pagina che utilizza _Layout
+    // andava a cercare la proprietà Pages al''interno del proprio Model.
+    // Vedi se puoi caricare Pages direttamente nel service container, per poter accedervi da 
+    // qualunque posizione ed evitare di ricalcolarlo ad ogni richiesta. Servirebbe definire però host, necessario per caricare app settings
+
+    var Pages = ViewData["Pages"] as List<Repository>;
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +24,7 @@
     <link rel="stylesheet" href="~/RazorApp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+@*     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">RazorApp</a>
@@ -20,7 +33,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
@@ -31,9 +44,9 @@
                     </ul>
 
                     <ul class="navbar-nav flex-grow-1">
-                        @if (pages != null && pages.Count > 0)
+                        @if (Pages != null && Pages.Count > 0)
                         {
-                            foreach(Repository pg in pages)
+                            foreach (Repository pg in Pages)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/@pg.GetLabel(lang)">@pg.GetTitle(lang)</a>
@@ -44,18 +57,25 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> *@
+
+    @* @Html.Partial(ViewData["HeaderPartial"] as string) *@
+    @Html.Partial("_HeaderA")
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* @Html.Partial(ViewData["FooterPartial"] as string) *@
+    @Html.Partial("_FooterA")
+
+@*     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - RazorApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -66,7 +86,7 @@
 </body>
 </html>
 
-@{
+@* @{
     List<Repository> pages = new List<Repository>();
     string lang = "it";
 
@@ -74,4 +94,4 @@
     {
         
     }
-}
+} *@

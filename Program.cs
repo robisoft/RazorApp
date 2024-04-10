@@ -1,9 +1,40 @@
 using crossPublisher;
+using System.Net.NetworkInformation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddHttpContextAccessor();  // ho aggiunto HttpContext per poter ottenere URL. NavigationManager è di Blazor.
+
+
+var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
+if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
+    appSettings.Store = "admin";
+builder.Services.AddSingleton(appSettings!);
+
+
+// non so se ha senso, ma potrei ricavare la lista delle pages con le relative proprietà qui, per evitare di ricalcolarela ogni volta.
+// così sarebbe disponibile tramite DI. Mi servirebbe il valore di host, che potrebbe essere passato direttamete da qui.
+
+
+
+// se volessi usare le sessioni, ad esempio per memorizzare le preferenze dell'utente come ad esempio 'lang', devo configurare il supporto per le sessioni:
+//builder.Services.AddSession(options =>
+//{
+//    // Configura le opzioni della sessione qui, se necessario
+//    options.IdleTimeout = TimeSpan.FromMinutes(30); // Esempio: timeout della sessione di 30 minuti
+//});
+
+// se poi voglio usare le sessioni, nella pagina devo fare così:
+//@using Microsoft.AspNetCore.Http
+
+//@{
+//    HttpContext.Session.SetString("Key", "Value");
+//    var value = HttpContext.Session.GetString("Key");
+//}
 
 var app = builder.Build();
 
@@ -15,10 +46,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
-if (!String.IsNullOrEmpty(appSettings.Store))
-    appSettings.Store = "admin";
-builder.Services.AddSingleton(appSettings!);
 
 
 app.UseHttpsRedirection();
@@ -29,5 +56,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+// app.UseSession(); //sempre se voglio usare le sessioni
 app.Run();
