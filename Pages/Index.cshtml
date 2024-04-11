@@ -1,10 +1,18 @@
 ﻿@page
+@using crossPublisher
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    Layout = ViewData["Layout"]?.ToString();
+
+    Repository currPage = ViewData["currPage"] as Repository;
+    string lang = ViewData["currLang"]?.ToString();
+    string error = ViewData["error"]?.ToString();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>@currPage.GetTitle(lang)</h1>
+
+<p>@error</p>
+
+<p>lang: @lang</p>
+<p>RepositoryID: @currPage.RepositoryID</p>

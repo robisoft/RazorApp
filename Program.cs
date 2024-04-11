@@ -1,4 +1,6 @@
 using crossPublisher;
+using crossPublisherRazor;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net.NetworkInformation;
 
 
@@ -14,6 +16,8 @@ var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSetting
 if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
     appSettings.Store = "admin";
 builder.Services.AddSingleton(appSettings!);
+
+builder.Services.AddScoped<WebAppSession>();
 
 
 // non so se ha senso, ma potrei ricavare la lista delle pages con le relative proprietà qui, per evitare di ricalcolarela ogni volta.
@@ -46,9 +50,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
-
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

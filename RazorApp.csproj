@@ -18,12 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Npgsql" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="crossPublisherCore">
       <HintPath>..\crossPublisherCore\bin\Release\net8.0\crossPublisherCore.dll</HintPath>
+    </Reference>
+    <Reference Include="crossPublisherRazor">
+      <HintPath>..\crossPublisherRazor\bin\Release\net8.0\crossPublisherRazor.dll</HintPath>
     </Reference>
   </ItemGroup>
 

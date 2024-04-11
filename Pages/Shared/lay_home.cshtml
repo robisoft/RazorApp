@@ -1,0 +1,22 @@
+﻿@using crossPublisher
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = "_Layout";
+
+    // Pages definito nel modello e passate tramite ViewData.
+    // Se le passavo direttamente con Model.Page, ogni pagina che utilizza _Layout
+    // andava a cercare la proprietà Pages al''interno del proprio Model.
+    // Vedi se puoi caricare Pages direttamente nel service container, per poter accedervi da 
+    // qualunque posizione ed evitare di ricalcolarlo ad ogni richiesta. Servirebbe definire però host, necessario per caricare app settings
+
+}
+
+    <div class="container">
+        <main role="main" class="pb-3">
+        
+            <div>Layout home!</div>
+
+            @RenderBody()
+        </main>
+    </div>
