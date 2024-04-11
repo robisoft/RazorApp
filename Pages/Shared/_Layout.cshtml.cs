@@ -21,12 +21,12 @@ namespace RazorApp.Pages
         private readonly AppSettings _appSettings;
         private WebAppSession _webApp { get; set; }
 
-        private readonly HttpContext _httpContext;
+        //private readonly HttpContext _httpContext;
         public List<Repository> Pages { get; set; } = new List<Repository>();
 
 
         public _LayoutModel(ILogger<IndexModel> logger,
-                            HttpContext httpContext,
+                            //HttpContext httpContext,
                             AppSettings appSettings,
                             WebAppSession webApp)  
         {
@@ -34,7 +34,7 @@ namespace RazorApp.Pages
             
             _appSettings = appSettings;
             _webApp = webApp;
-            _httpContext = httpContext;
+            //_httpContext = httpContext;
         }
 
         public string HeaderPartial { get; private set; }
@@ -44,9 +44,9 @@ namespace RazorApp.Pages
         {
             //string host = NavigationManager.BaseUri; // dominio
             // risalgo al dominio con HttpContext, aggiusta la stringa a seconda della necessità
-            string host = $"{_httpContext.Request.Scheme}://{_httpContext.Request.Host}";
+            string host = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
             
-            string url = _httpContext.Request.Host.ToUriComponent();
+            string url = HttpContext.Request.Host.ToUriComponent();
 
             DataAccess data = Utils.GetDataAccess(_appSettings, host);
             _webApp.Init(data, url, _appSettings);

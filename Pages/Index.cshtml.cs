@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using crossPublisher;
 using crossPublisherRazor;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http;
 
 namespace RazorApp.Pages
 {
@@ -16,17 +16,17 @@ namespace RazorApp.Pages
         private WebAppSession webApp { get; set; }
 
         private string url;
-        private HttpContext _httpContext;
+        //private HttpContext _httpContext;
 
         public IndexModel(
             ILogger<IndexModel> logger,
-            HttpContext httpContext,
+            //HttpContext httpContext,
             AppSettings appSettings,
             WebAppSession webAppSession)
         {
             _logger = logger;
 
-            _httpContext = httpContext;
+            //_httpContext = httpContext;
             _appSettings = appSettings;
             webApp = webAppSession;
         }
@@ -39,10 +39,12 @@ namespace RazorApp.Pages
             // webApp.Init(data, url, appSettings);
 
             // Carico la pagina corrrente
-            var currentPagePath = _httpContext.Request.Path;
+            var currentPagePath = HttpContext.Request.Path;
             webApp.LoadCurrPage(currentPagePath, "home", "not-found", "reserved");
 
-            ViewData["Layout"] = webApp.currPage.GetLayout("_HomeLayout");
+            //ViewData["Layout"] = webApp.currPage.GetLayout("_HomeLayout");
+            ViewData["Layout"] = webApp.currPage.GetLayout("lay_home");
+
             ViewData["currPage"] = webApp.currPage;
             ViewData["currLang"] = webApp.currLang;
             ViewData["error"] = data.LastError;

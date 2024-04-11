@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddHttpContextAccessor();  // ho aggiunto HttpContext per poter ottenere URL. NavigationManager è di Blazor.
+// la riga sopra serve per rendere disponibile HttpContext al fuori dei controllers o dei pagemodels. non ha senso iniettarlo come ho fatto io
+// poichè è HttpContext è già presente nelle classi ereditate 'ControllerBase' e 'PageModel'.
+// Quindi in questi contesti si può usare direttamente HttpContext senza iniettarlo
 
 
 var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
