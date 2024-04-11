@@ -36,7 +36,7 @@ namespace RazorApp.Pages
             url = HttpContext.Request.Host.ToUriComponent();
 
             DataAccess data = Utils.GetDataAccess(_appSettings, url);
-            // webApp.Init(data, url, appSettings);
+            webApp.Init(data, url, _appSettings);
 
             // Carico la pagina corrrente
             var currentPagePath = HttpContext.Request.Path;
