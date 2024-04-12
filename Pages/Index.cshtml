@@ -8,6 +8,12 @@
     Repository currPage = ViewData["currPage"] as Repository;
     string lang = ViewData["currLang"]?.ToString();
     string error = ViewData["error"]?.ToString();
+
+    // renderizzare del contenuto HTML statico
+    string html = "<div>Contentuto HTML della pagina!</div>";
+
+    // Includere (tramite Partial?) una pagina cshtml
+    string page = "prova.cshtml";
 }
 
 <h1>@currPage.GetTitle(lang)</h1>

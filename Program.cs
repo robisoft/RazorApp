@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 builder.Services.AddHttpContextAccessor();  // ho aggiunto HttpContext per poter ottenere URL. NavigationManager è di Blazor.
 // la riga sopra serve per rendere disponibile HttpContext al fuori dei controllers o dei pagemodels. non ha senso iniettarlo come ho fatto io
 // poichè è HttpContext è già presente nelle classi ereditate 'ControllerBase' e 'PageModel'.
@@ -21,7 +23,6 @@ if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
     appSettings.Store = "admin";
 
 builder.Services.AddSingleton(appSettings!);
-
 builder.Services.AddScoped<WebAppSession>();
 
 
