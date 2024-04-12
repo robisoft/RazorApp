@@ -47,6 +47,27 @@ namespace RazorApp.Pages
             ViewData["currLang"] = _webApp.currLang;
             ViewData["error"] = data.LastError;
 
+            //string host = NavigationManager.BaseUri; // dominio
+            // risalgo al dominio con HttpContext, aggiusta la stringa a seconda della necessità
+            string host = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+
+            //string url = HttpContext.Request.Host.ToUriComponent();
+
+            //DataAccess data = Utils.GetDataAccess(_appSettings, host);
+
+            //Console.WriteLine("_LayoutModel --> OnGet qui non passa");
+
+            _webApp.Init(data, url, _appSettings);
+
+
+            crossRepository repository = new crossRepository(data, 0);
+            var pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
+            ViewData["Pages"] = pages;  //passo Pages alla view del Layout 
+
+
+            ViewData["HeaderPartial"] = "_HeaderA";
+            ViewData["FooterPartial"] = "_FooterA";
+
         }
     }
 }

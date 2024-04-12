@@ -33,6 +33,7 @@ namespace RazorApp.Pages
             _appSettings = appSettings;
             _webApp = webApp;
             //_httpContext = httpContext;
+
         }
 
         public string HeaderPartial { get; private set; }
@@ -40,25 +41,7 @@ namespace RazorApp.Pages
 
         public void OnGet()
         {
-            //string host = NavigationManager.BaseUri; // dominio
-            // risalgo al dominio con HttpContext, aggiusta la stringa a seconda della necessità
-            string host = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
-            
-            string url = HttpContext.Request.Host.ToUriComponent();
-
-            DataAccess data = Utils.GetDataAccess(_appSettings, host);
-
-            Console.WriteLine("_LayoutModel --> OnGet qui non passa");
-            _webApp.Init(data, url, _appSettings);
-
-
-            crossRepository repository = new crossRepository(data, 0);
-            Pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
-            ViewData["Pages"] = Pages;  //passo Pages alla view del Layout 
-
-
-            ViewData["HeaderPartial"] = "_HeaderA";
-            ViewData["FooterPartial"] = "_FooterA";
+           
         }
 
     }
