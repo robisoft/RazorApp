@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace RazorApp.Pages
 {
-    public class LayHomeModel : PageModel
+    public class lay_homeModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly AppSettings _appSettings;
@@ -21,7 +21,7 @@ namespace RazorApp.Pages
         private readonly string lang = "it";
 
 
-        public LayHomeModel(ILogger<IndexModel> logger, 
+        public lay_homeModel(ILogger<IndexModel> logger, 
                             IOptions<AppSettings> appSettings,
                             HttpContext httpContext)  
         {
@@ -32,7 +32,7 @@ namespace RazorApp.Pages
 
         public void OnGet()
         {
-            
+            Console.WriteLine("lay_homeModel --> onGet");
         }
 
     }

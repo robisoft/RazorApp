@@ -2,6 +2,7 @@ using crossPublisher;
 using crossPublisherRazor;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.NetworkInformation;
+using System.Security.Policy;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddHttpContextAccessor();  // ho aggiunto HttpContext per poter
 var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
 if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
     appSettings.Store = "admin";
+
 builder.Services.AddSingleton(appSettings!);
 
 builder.Services.AddScoped<WebAppSession>();

@@ -21,12 +21,10 @@ namespace RazorApp.Pages
         private readonly AppSettings _appSettings;
         private WebAppSession _webApp { get; set; }
 
-        //private readonly HttpContext _httpContext;
         public List<Repository> Pages { get; set; } = new List<Repository>();
 
 
         public _LayoutModel(ILogger<IndexModel> logger,
-                            //HttpContext httpContext,
                             AppSettings appSettings,
                             WebAppSession webApp)  
         {
@@ -49,6 +47,8 @@ namespace RazorApp.Pages
             string url = HttpContext.Request.Host.ToUriComponent();
 
             DataAccess data = Utils.GetDataAccess(_appSettings, host);
+
+            Console.WriteLine("_LayoutModel --> webApp.Init");
             _webApp.Init(data, url, _appSettings);
 
 

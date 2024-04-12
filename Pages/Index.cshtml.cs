@@ -11,16 +11,12 @@ namespace RazorApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-
         private AppSettings _appSettings { get; set; }
-        private WebAppSession webApp { get; set; }
+        private WebAppSession _webApp { get; set; }
 
-        private string url;
-        //private HttpContext _httpContext;
 
         public IndexModel(
             ILogger<IndexModel> logger,
-            //HttpContext httpContext,
             AppSettings appSettings,
             WebAppSession webAppSession)
         {
@@ -28,25 +24,27 @@ namespace RazorApp.Pages
 
             //_httpContext = httpContext;
             _appSettings = appSettings;
-            webApp = webAppSession;
+            _webApp = webAppSession;
         }
 
         public void OnGet()
         {
-            url = HttpContext.Request.Host.ToUriComponent();
+            string url = HttpContext.Request.Host.ToUriComponent();
 
             DataAccess data = Utils.GetDataAccess(_appSettings, url);
-            webApp.Init(data, url, _appSettings);
+            Console.WriteLine("IndexModel --> webApp.Init");
+            
+            // da spostare nel Layout: sarebbe bene richiamarla solo 1 volta
+            _webApp.Init(data, url, _appSettings);
 
             // Carico la pagina corrrente
             var currentPagePath = HttpContext.Request.Path;
-            webApp.LoadCurrPage(currentPagePath, "home", "not-found", "reserved");
+            _webApp.LoadCurrPage(currentPagePath, "home", "not-found", "reserved");
 
-            //ViewData["Layout"] = webApp.currPage.GetLayout("_HomeLayout");
-            ViewData["Layout"] = webApp.currPage.GetLayout("lay_home");
+            ViewData["Layout"] = _webApp.currPage.GetLayout("lay_home");
 
-            ViewData["currPage"] = webApp.currPage;
-            ViewData["currLang"] = webApp.currLang;
+            ViewData["currPage"] = _webApp.currPage;
+            ViewData["currLang"] = _webApp.currLang;
             ViewData["error"] = data.LastError;
 
         }
