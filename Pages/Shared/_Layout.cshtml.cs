@@ -48,7 +48,7 @@ namespace RazorApp.Pages
 
             DataAccess data = Utils.GetDataAccess(_appSettings, host);
 
-            Console.WriteLine("_LayoutModel --> webApp.Init");
+            Console.WriteLine("_LayoutModel --> OnGet qui non passa");
             _webApp.Init(data, url, _appSettings);
 
 

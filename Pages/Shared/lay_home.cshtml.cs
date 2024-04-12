@@ -32,7 +32,7 @@ namespace RazorApp.Pages
 
         public void OnGet()
         {
-            Console.WriteLine("lay_homeModel --> onGet");
+            Console.WriteLine("lay_homeModel --> OnGet qui non passa");
         }
 
     }
