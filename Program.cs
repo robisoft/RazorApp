@@ -1,6 +1,8 @@
 using crossPublisher;
 using crossPublisherRazor;
 using Microsoft.Extensions.DependencyInjection;
+using RazorApp.Services;
+using RazorApp.ViewComponents;
 using System.Net.NetworkInformation;
 using System.Security.Policy;
 
@@ -24,6 +26,7 @@ if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
 
 builder.Services.AddSingleton(appSettings!);
 builder.Services.AddScoped<WebAppSession>();
+builder.Services.AddScoped<IPageService, PageService>();
 
 
 // non so se ha senso, ma potrei ricavare la lista delle pages con le relative proprietà qui, per evitare di ricalcolarela ogni volta.

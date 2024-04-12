@@ -49,7 +49,7 @@ namespace RazorApp.Pages
 
             //string host = NavigationManager.BaseUri; // dominio
             // risalgo al dominio con HttpContext, aggiusta la stringa a seconda della necessità
-            string host = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+            //string host = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
 
             //string url = HttpContext.Request.Host.ToUriComponent();
 
@@ -57,16 +57,16 @@ namespace RazorApp.Pages
 
             //Console.WriteLine("_LayoutModel --> OnGet qui non passa");
 
-            _webApp.Init(data, url, _appSettings);
+            //_webApp.Init(data, url, _appSettings);
 
 
-            crossRepository repository = new crossRepository(data, 0);
-            var pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
-            ViewData["Pages"] = pages;  //passo Pages alla view del Layout 
+            //crossRepository repository = new crossRepository(data, 0);
+            //var pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
+            //ViewData["Pages"] = pages;  //passo Pages alla view del Layout 
 
 
-            ViewData["HeaderPartial"] = "_HeaderA";
-            ViewData["FooterPartial"] = "_FooterA";
+            //ViewData["HeaderPartial"] = "_HeaderA";
+            //ViewData["FooterPartial"] = "_FooterA";
 
         }
     }
