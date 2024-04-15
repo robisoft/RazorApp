@@ -1,4 +1,5 @@
 ﻿@page
+@using Microsoft.AspNetCore.Html
 @using crossPublisher
 @model IndexModel
 
@@ -10,15 +11,19 @@
     string error = ViewData["error"]?.ToString();
 
     // renderizzare del contenuto HTML statico
-    string html = "<div>Contentuto HTML della pagina!</div>";
+    string html = "<h2>Contentuto HTML della pagina!</h2>";
 
     // Includere (tramite Partial?) una pagina cshtml
     string page = "prova.cshtml";
+
+    // non mi è chiaro come includere una pagina. Se le pagine fossero presenti nel filesystem del progetto, 
+    // potrei caricarla sfruttando i view Components. Dato che il contenuto delle pagine è sul DB,devo capire come
+    // fare riferimento al contenuto della pagina che deve essere inclusa.
 }
 
 <h1>@currPage.GetTitle(lang)</h1>
 
 <p>@error</p>
-
+@(new HtmlString(html))
 <p>lang: @lang</p>
 <p>RepositoryID: @currPage.RepositoryID</p>
