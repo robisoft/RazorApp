@@ -1,8 +1,12 @@
 using crossPublisher;
 using crossPublisherRazor;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using RazorApp.Services;
+using RazorApp.ViewComponents;
 using System.Net.NetworkInformation;
 using System.Security.Policy;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,19 +23,17 @@ builder.Services.AddHttpContextAccessor();  // ho aggiunto HttpContext per poter
 
 
 var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSettings>();
-if (appSettings != null && !String.IsNullOrEmpty(appSettings.Store))
+if (appSettings != null && !System.String.IsNullOrEmpty(appSettings.Store))
     appSettings.Store = "admin";
 
 builder.Services.AddSingleton(appSettings!);
-builder.Services.AddScoped<WebAppSession>();
 
+builder.Services.AddSingleton<WebAppSession>();
+// WebAppSession come singleton cosi la posso inizializzare una volta sola
 
-// non so se ha senso, ma potrei ricavare la lista delle pages con le relative proprietà qui, per evitare di ricalcolarela ogni volta.
-// così sarebbe disponibile tramite DI. Mi servirebbe il valore di host, che potrebbe essere passato direttamete da qui.
+builder.Services.AddScoped<IPageService, PageService>();
 
-
-
-// se volessi usare le sessioni, ad esempio per memorizzare le preferenze dell'utente come ad esempio 'lang', devo configurare il supporto per le sessioni:
+////se volessi usare le sessioni, ad esempio per memorizzare le preferenze dell'utente come ad esempio 'lang', devo configurare il supporto per le sessioni:
 //builder.Services.AddSession(options =>
 //{
 //    // Configura le opzioni della sessione qui, se necessario
