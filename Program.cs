@@ -12,7 +12,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorPagesOptions(options => {
+    options.Conventions.AddPageRoute("/index", "{*url}");
+});
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
