@@ -1,7 +1,9 @@
 ﻿@using crossPublisher
+@using crossPublisherRazor
 @using Microsoft.AspNetCore.Mvc.Rendering
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @inject AppSettings appSettings
+@inject WebAppSession webApp
 
 @{
 
@@ -18,8 +20,9 @@
     var host = $"{HttpContextAccessor.HttpContext.Request.Scheme}://{HttpContextAccessor.HttpContext.Request.Host}";
     DataAccess data = Utils.GetDataAccess(appSettings, host);
     crossRepository repository = new crossRepository(data, 0);
-    var pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
-    string lang = "it";
+    // spostato giù
+    // var pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
+    string lang = webApp.currLang;
 }
 
 
@@ -28,7 +31,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RazorApp</title>
+    <title>@webApp.currPage.GetTitle("it") - RazorApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RazorApp.styles.css" asp-append-version="true" />
@@ -50,13 +53,17 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (pages != null && pages.Count > 0)
-                        {
-                            foreach (var @pg in pages)
+                        @{
+                            List<Repository> pages = repository.GetRepositoryList(0, "WebPage", false, "", "", "", null, "", false);
+
+                            if (pages != null && pages.Count > 0)
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/@pg.GetLabel(lang)">@pg.GetTitle(lang)</a>
-                                </li>
+                                foreach (var @pg in pages)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/@pg.GetLabel(lang)">@pg.GetTitle(lang) (@pg.GetLabel(lang))</a>
+                                    </li>
+                                }
                             }
                         }
                     </ul>
