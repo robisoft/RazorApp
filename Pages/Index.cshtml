@@ -24,6 +24,7 @@
 <h1>@currPage.GetTitle(lang)</h1>
 
 <p>@error</p>
-@(new HtmlString(html))
+
+@(new HtmlString(currPage.GetContent(lang)))
 <p>lang: @lang</p>
 <p>RepositoryID: @currPage.RepositoryID</p>
