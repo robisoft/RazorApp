@@ -26,12 +26,17 @@ var appSettings = builder.Configuration.GetSection("AppSettings").Get<AppSetting
 if (appSettings != null && !System.String.IsNullOrEmpty(appSettings.Store))
     appSettings.Store = "admin";
 
+// Tutti condividono il settaggio del sito web (connString, hostname, ecc)
 builder.Services.AddSingleton(appSettings!);
 
-builder.Services.AddSingleton<WebAppSession>();
-// WebAppSession come singleton cosi la posso inizializzare una volta sola
+builder.Services.AddScoped<WebAppSession>();
+// WebAppSession contiene la currPage, currUser, ecc e quindi è personale x ogni utente che si collega al sito
+// Deve pertanto essere Scoped
 
+// Da eliminare! Ogni file deve avere il suo codice, altrimenti diventa ingestibile il sito
+// Ad esempio tutta la logica per costruire l'header deve stare in header.cshtml
 builder.Services.AddScoped<IPageService, PageService>();
+
 
 ////se volessi usare le sessioni, ad esempio per memorizzare le preferenze dell'utente come ad esempio 'lang', devo configurare il supporto per le sessioni:
 //builder.Services.AddSession(options =>
