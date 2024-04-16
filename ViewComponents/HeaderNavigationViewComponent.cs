@@ -15,6 +15,7 @@ namespace RazorApp.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var Pages = _pageService.GetPages();
+
             return View(Pages);
         }
     }
