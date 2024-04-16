@@ -61,7 +61,7 @@
                                 foreach (var @pg in pages)
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-page="/@pg.GetLabel(lang)">@pg.GetTitle(lang) (@pg.GetLabel(lang))</a>
+                                        <a class="nav-link text-dark" href="/@pg.GetLabel(lang)">@pg.GetTitle(lang)</a>
                                     </li>
                                 }
                             }
