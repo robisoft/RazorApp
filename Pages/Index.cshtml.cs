@@ -30,10 +30,7 @@ namespace RazorApp.Pages
              string url = HttpContext.Request.Host.ToUriComponent();
              DataAccess data = Utils.GetDataAccess(_appSettings, url);
 
-            Console.WriteLine("IndexModel --> webApp.Init --> cercare di spostare questa init nel _Layout.cshtml, se possibile");
-
             _webApp.Init(data, url, _appSettings);
-            // ho messo WebApp come singleton, così rimane la stessa istanza e la inizializzo una volrta sola.
           
 
             // Carico la pagina corrrente

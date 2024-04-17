@@ -2,11 +2,8 @@ using crossPublisher;
 using crossPublisherRazor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using RazorApp.Services;
-using RazorApp.ViewComponents;
 using System.Net.NetworkInformation;
 using System.Security.Policy;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,9 +32,8 @@ builder.Services.AddScoped<WebAppSession>();
 // WebAppSession contiene la currPage, currUser, ecc e quindi è personale x ogni utente che si collega al sito
 // Deve pertanto essere Scoped
 
-// Da eliminare! Ogni file deve avere il suo codice, altrimenti diventa ingestibile il sito
-// Ad esempio tutta la logica per costruire l'header deve stare in header.cshtml
-builder.Services.AddScoped<IPageService, PageService>();
+// Per condividere del codice all'interno del sito
+// builder.Services.AddSingleton<IPageService, PageService>();
 
 
 ////se volessi usare le sessioni, ad esempio per memorizzare le preferenze dell'utente come ad esempio 'lang', devo configurare il supporto per le sessioni:

@@ -1,7 +1,4 @@
-﻿@using crossPublisher
-@using crossPublisherRazor
-@using Microsoft.AspNetCore.Mvc.Rendering
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @inject AppSettings appSettings
 @inject WebAppSession webApp
 
@@ -38,15 +35,10 @@
 </head>
 <body>
 
-   @* @Html.Partial(ViewData["HeaderPartial"] as string) *@
-   @*  @Html.Partial("_HeaderA") *@
-   @* @await Component.InvokeAsync("HeaderNavigation")  *@
-
-    @* inizio header *@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">RazorApp</a>
+                <a class="navbar-brand" href="/">RazorApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -71,23 +63,21 @@
             </div>
         </nav>
     </header>
-    @* fine header *@
+
 
     <div class="container">
         <main role="main" class="pb-3">
-         
             @RenderBody()
         </main>
     </div>
 
-    @* @Html.Partial(ViewData["FooterPartial"] as string) *@
-    @Html.Partial("_FooterA")
 
-@*     <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - RazorApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer> *@
+    </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
